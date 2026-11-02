@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catppuccin Startpage</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Custom Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ctp: {
+              rosewater: '#f5e0dc',
+              flamingo: '#f2cdcd',
+              pink: '#f5c2e7',
+              mauve: '#cba6f7',
+              red: '#f38ba8',
+              maroon: '#eba0ac',
+              peach: '#fab387',
+              yellow: '#f9e2af',
+              green: '#a6e3a1',
+              teal: '#94e2d5',
+              sky: '#89dceb',
+              sapphire: '#74c7ec',
+              blue: '#89b4fa',
+              lavender: '#b4befe',
+              text: '#cdd6f4',
+              subtext1: '#bac2de',
+              subtext0: '#a6adc8',
+              overlay2: '#9399b2',
+              overlay1: '#7f849c',
+              overlay0: '#6c7086',
+              surface2: '#585b70',
+              surface1: '#45475a',
+              surface0: '#313244',
+              base: '#1e1e2e',
+              mantle: '#181825',
+              crust: '#11111b',
+            }
+          },
+          fontFamily: {
+            mono: ['"JetBrains Mono"', 'monospace'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background-color: #1e1e2e;
+      color: #cdd6f4;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .glow-effect {
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glow-effect:hover {
+      box-shadow: 0 0 25px -5px rgba(203, 166, 247, 0.15);
+      transform: translateY(-2px);
+    }
+    .search-input:focus {
+      box-shadow: 0 0 30px -5px rgba(137, 180, 250, 0.25);
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-ctp-base text-ctp-text flex flex-col justify-between items-center p-4 md:p-8 select-none">
+
+  <!-- Background decorative subtle elements -->
+  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+    <div class="absolute -top-40 -left-40 w-96 h-96 bg-ctp-mauve/5 rounded-full blur-3xl"></div>
+    <div class="absolute top-1/2 -right-40 w-96 h-96 bg-ctp-blue/5 rounded-full blur-3xl"></div>
+    <div class="absolute -bottom-40 left-1/3 w-96 h-96 bg-ctp-pink/5 rounded-full blur-3xl"></div>
+  </div>
+
+  <!-- Main Content Container -->
+  <main class="relative z-10 w-full max-w-4xl mx-auto my-auto flex flex-col items-center gap-8 py-6">
+    
+    <!-- Time & Date Header -->
+    <header class="text-center space-y-1">
+      <h1 id="clock" class="text-6xl sm:text-7xl font-bold font-mono tracking-tight text-ctp-mauve drop-shadow-md">
+        00:00:00
+      </h1>
+      <p id="date" class="text-base sm:text-lg font-medium text-ctp-subtext0 tracking-wide">
+        Loading...
+      </p>
+    </header>
+
+    <!-- Search Engine Section -->
+    <section class="w-full max-w-2xl px-2">
+      <form id="search-form" class="relative group">
+        <!-- Search Engine Select Menu & Input Icon Container -->
+        <div class="absolute inset-y-0 left-0 flex items-center pl-4 space-x-2 pointer-events-auto">
+          <!-- Engine Selector -->
+          <div class="relative">
+            <select id="engine-select" class="bg-ctp-mantle text-ctp-peach text-xs font-mono font-medium py-1.5 px-2 rounded-lg border border-ctp-surface1 hover:border-ctp-peach/50 focus:outline-none cursor-pointer appearance-none pr-5 transition-colors">
+              <option value="google">Google</option>
+              <option value="duckduckgo">DDG</option>
+              <option value="bing">Bing</option>
+              <option value="youtube">YouTube</option>
+              <option value="github">GitHub</option>
+            </select>
+            <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-1.5 text-ctp-peach">
+              <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20">
+                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Search Input -->
+        <input 
+          type="text" 
+          id="search-input"
+          placeholder="Search the web or type a query..." 
+          autocomplete="off"
+          autofocus
+          class="search-input w-full py-4 pl-36 pr-14 bg-ctp-mantle/80 backdrop-blur-md text-ctp-text placeholder-ctp-overlay1 text-base rounded-2xl border border-ctp-surface1 focus:border-ctp-blue focus:outline-none transition-all duration-300"
+        >
+
+        <!-- Submit Button -->
+        <button 
+          type="submit" 
+          aria-label="Search"
+          class="absolute inset-y-0 right-0 flex items-center pr-4 text-ctp-overlay2 group-hover:text-ctp-blue transition-colors duration-200"
+        >
+          <svg class="w-6 h-6 stroke-current" fill="none" viewBox="0 0 24 24" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+          </svg>
+        </button>
+      </form>
+    </section>
+
+    <!-- Shortcuts Grid -->
+    <section class="w-full max-w-3xl mt-4">
+      <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+        
+        <!-- Gmail -->
+        <a 
+          href="https://mail.google.com" 
+          class="glow-effect flex flex-col items-center justify-center p-5 rounded-2xl bg-ctp-mantle/60 border border-ctp-surface0 hover:border-ctp-red group transition-all"
+        >
+          <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-ctp-surface0 text-ctp-red group-hover:bg-ctp-red group-hover:text-ctp-base transition-colors duration-300">
+            <!-- Gmail SVG -->
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+            </svg>
+          </div>
+          <span class="mt-3 text-sm font-medium text-ctp-subtext1 group-hover:text-ctp-text">Gmail</span>
+        </a>
+
+        <!-- GitHub -->
+        <a 
+          href="https://github.com" 
+          class="glow-effect flex flex-col items-center justify-center p-5 rounded-2xl bg-ctp-mantle/60 border border-ctp-surface0 hover:border-ctp-mauve group transition-all"
+        >
+          <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-ctp-surface0 text-ctp-mauve group-hover:bg-ctp-mauve group-hover:text-ctp-base transition-colors duration-300">
+            <!-- GitHub SVG -->
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+            </svg>
+          </div>
+          <span class="mt-3 text-sm font-medium text-ctp-subtext1 group-hover:text-ctp-text">GitHub</span>
+        </a>
+
+        <!-- YouTube -->
+        <a 
+          href="https://youtube.com" 
+          class="glow-effect flex flex-col items-center justify-center p-5 rounded-2xl bg-ctp-mantle/60 border border-ctp-surface0 hover:border-ctp-peach group transition-all"
+        >
+          <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-ctp-surface0 text-ctp-peach group-hover:bg-ctp-peach group-hover:text-ctp-base transition-colors duration-300">
+            <!-- YouTube SVG -->
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+              <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+            </svg>
+          </div>
+          <span class="mt-3 text-sm font-medium text-ctp-subtext1 group-hover:text-ctp-text">YouTube</span>
+        </a>
+
+        <!-- Catppuccin -->
+        <a 
+          href="https://catppuccin.com" 
+          class="glow-effect flex flex-col items-center justify-center p-5 rounded-2xl bg-ctp-mantle/60 border border-ctp-surface0 hover:border-ctp-pink group transition-all"
+        >
+          <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-ctp-surface0 text-ctp-pink group-hover:bg-ctp-pink group-hover:text-ctp-base transition-colors duration-300">
+            <!-- Official Catppuccin Mascot Logo SVG -->
+            <svg class="w-7 h-7 stroke-current fill-none" viewBox="0 0 100 100" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+              <!-- Cat Head Outline with Ears -->
+              <path d="M 22 28 C 20 18, 38 18, 42 31 C 50 28, 50 28, 58 31 C 62 18, 80 18, 78 28 C 92 42, 92 68, 78 80 C 70 85, 30 85, 22 80 C 8 68, 8 42, 22 28 Z" fill="currentColor" class="group-hover:fill-ctp-base transition-colors duration-300" stroke="none"/>
+              <!-- Eye Arcs -->
+              <path d="M 33 46 Q 41 38 47 46" stroke="#1e1e2e" class="group-hover:stroke-ctp-pink transition-colors duration-300" stroke-width="5"/>
+              <path d="M 53 46 Q 59 38 67 46" stroke="#1e1e2e" class="group-hover:stroke-ctp-pink transition-colors duration-300" stroke-width="5"/>
+              <!-- Nose & Mouth -->
+              <path d="M 45 52 Q 50 56 55 52 L 50 58 Z" fill="#1e1e2e" class="group-hover:fill-ctp-pink transition-colors duration-300" stroke="none"/>
+              <path d="M 43 60 Q 50 66 50 60 Q 50 66 57 60" stroke="#1e1e2e" class="group-hover:stroke-ctp-pink transition-colors duration-300" stroke-width="4.5"/>
+              <!-- Bowtie -->
+              <path d="M 43 80 L 50 83 L 57 80 L 55 87 L 50 83 L 45 87 Z" fill="#f5c2e7" class="group-hover:fill-ctp-base transition-colors duration-300" stroke="none"/>
+            </svg>
+          </div>
+          <span class="mt-3 text-sm font-medium text-ctp-subtext1 group-hover:text-ctp-text">Catppuccin</span>
+        </a>
+
+        <!-- Gemini -->
+        <a 
+          href="https://gemini.google.com" 
+          class="glow-effect flex flex-col items-center justify-center p-5 rounded-2xl bg-ctp-mantle/60 border border-ctp-surface0 hover:border-ctp-blue group transition-all"
+        >
+          <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-ctp-surface0 text-ctp-blue group-hover:bg-ctp-blue group-hover:text-ctp-base transition-colors duration-300">
+            <!-- Gemini Sparkle SVG -->
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+              <path d="M12 2L9.5 9.5 2 12l7.5 2.5L12 22l2.5-7.5L22 12l-7.5-2.5L12 2z"/>
+            </svg>
+          </div>
+          <span class="mt-3 text-sm font-medium text-ctp-subtext1 group-hover:text-ctp-text">Gemini</span>
+        </a>
+
+        <!-- TikTok -->
+        <a 
+          href="https://tiktok.com" 
+          class="glow-effect flex flex-col items-center justify-center p-5 rounded-2xl bg-ctp-mantle/60 border border-ctp-surface0 hover:border-ctp-teal group transition-all"
+        >
+          <div class="w-12 h-12 flex items-center justify-center rounded-xl bg-ctp-surface0 text-ctp-teal group-hover:bg-ctp-teal group-hover:text-ctp-base transition-colors duration-300">
+            <!-- Official TikTok Note Logo SVG -->
+            <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+              <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.86 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.3 0 .59.05.86.13v-3.5a6.37 6.37 0 0 0-.86-.06 6.34 6.34 0 0 0-6.34 6.32 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V9.05a8.28 8.28 0 0 0 4.77 1.49v-3.85a4.84 4.84 0 0 1-1.05-.0a4.85 4.85 0 0 1-3.73-3.73z"/>
+            </svg>
+          </div>
+          <span class="mt-3 text-sm font-medium text-ctp-subtext1 group-hover:text-ctp-text">TikTok</span>
+        </a>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="relative z-10 text-center py-2">
+    <p class="text-xs text-ctp-overlay0 font-mono">
+      Catppuccin Mocha • Minimalist Startpage
+    </p>
+  </footer>
+
+  <!-- JavaScript Logic -->
+  <script>
+    // Live Clock & Date Functionality
+    function updateClock() {
+      const now = new Date();
+      
+      // Formatting time (HH:MM:SS)
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const seconds = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+
+      // Formatting date (e.g., Monday, November 2, 2026)
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('date').textContent = now.toLocaleDateString('en-US', options);
+    }
+
+    // Run clock on load and update every second
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // Search Engine Map & Redirection
+    const searchEngines = {
+      google: 'https://www.google.com/search?q=',
+      duckduckgo: 'https://duckduckgo.com/?q=',
+      bing: 'https://www.bing.com/search?q=',
+      youtube: 'https://www.youtube.com/results?search_query=',
+      github: 'https://github.com/search?q='
+    };
+
+    const searchForm = document.getElementById('search-form');
+    const searchInput = document.getElementById('search-input');
+    const engineSelect = document.getElementById('engine-select');
+
+    searchForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const query = searchInput.value.trim();
+      if (!query) return;
+
+      const engine = engineSelect.value;
+      const baseUrl = searchEngines[engine] || searchEngines.google;
+
+      // Handle direct URL typing vs searching
+      if (query.startsWith('http://') || query.startsWith('https://')) {
+        window.location.href = query;
+      } else {
+        window.location.href = baseUrl + encodeURIComponent(query);
+      }
+    });
+
+    // Pressing 'Esc' clears search bar input
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        searchInput.value = '';
+      }
+    });
+  </script>
+</body>
+</html>
